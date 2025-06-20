@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const Constitution_Data = require('../models/ConstitutionPart');
 
-const MONGO_URI = "mongodb+srv://aditya:aditya1510@h4b-4.mbcn7j9.mongodb.net/VidhikGuru"
+const mongo_uri = process.env.MONGODB_URI;
 
 mongoose
-    .connect(MONGO_URI)
+    .connect(mongo_uri)
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('MongoDB connection error:', err));
 
