@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@google/generative-ai": "^0.24.1",
     "@langchain/community": "^0.3.46",
     "@langchain/google-genai": "^0.2.10",
@@ -23,6 +24,13 @@
     "mongodb": "^6.17.0",
     "mongoose": "^8.15.2",
     "next": "15.3.3",
+=======
+    "@civic/auth": "^0.8.0",
+    "@radix-ui/react-slot": "^1.2.3",
+    "class-variance-authority": "^0.7.1",
+    "lucide-react": "^0.519.0",
+    "next": "15.3.4",
+>>>>>>> 4499e96ea140dbe1191ea8ea597c1a4275f3ef79
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.3.1"
