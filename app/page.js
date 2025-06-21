@@ -1,28 +1,27 @@
 "use client"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { BookOpen, MessageCircle, Star,Trophy, Sparkles, Users, Award, Shield } from "lucide-react"
+import { BookOpen, MessageCircle, Star, Trophy, Sparkles, Users, Shield } from "lucide-react"
 import Link from "next/link"
-import { UserButton } from "@civic/auth/react";
-import { useUser } from "@civic/auth/react";
+import { UserButton } from "@civic/auth/react"
+import { useUser } from "@civic/auth/react"
 import { useRouter } from "next/navigation"
-
 
 export default function LandingPage() {
   const bookRef = useRef(null)
-  const { user } = useUser();
+  const { user } = useUser()
   console.log("User:", user)
-  const router= useRouter()
+  const router = useRouter()
 
   useEffect(() => {
     // Redirect to /learn if user is logged in
     if (user) {
-      router.push('/learn');
+      router.push("/learn")
     }
-  }, [user]);
-  
+  }, [user])
+
   useEffect(() => {
     const loadGSAP = async () => {
       const { gsap } = await import("gsap")
@@ -119,6 +118,8 @@ export default function LandingPage() {
     }
   }, [])
 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
   const constitutionalContent = [
     {
       title: "भारत का संविधान",
@@ -183,19 +184,20 @@ export default function LandingPage() {
     <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white/95 z-50 border-b border-gray-100 shadow-lg backdrop-blur-md">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-orange-500 via-white to-green-600 rounded-xl flex items-center justify-center border-2 border-orange-200">
-              <BookOpen className="w-6 h-6 text-orange-700" />
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-orange-500 via-white to-green-600 rounded-xl flex items-center justify-center border-2 border-orange-200">
+              <BookOpen className="w-5 h-5 md:w-6 md:h-6 text-orange-700" />
             </div>
             <div>
-              <span className="text-2xl font-black bg-gradient-to-r from-orange-600 to-green-600 bg-clip-text text-transparent">
+              <span className="text-xl md:text-2xl font-black bg-gradient-to-r from-orange-600 to-green-600 bg-clip-text text-transparent">
                 VidhikGuru
-
               </span>
-              <div className="text-xs text-gray-500 font-medium">Constitutional Learning Platform</div>
+              <div className="text-xs text-gray-500 font-medium hidden sm:block">Constitutional Learning Platform</div>
             </div>
           </div>
+
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link href="#features" className="text-gray-700 hover:text-orange-600 transition-colors font-medium">
               Features
@@ -203,18 +205,60 @@ export default function LandingPage() {
             <Link href="#about" className="text-gray-700 hover:text-orange-600 transition-colors font-medium">
               About
             </Link>
-            { user ? (
-              <Link href= '/learn'>
-            <Button className="bg-gradient-to-r from-orange-500 to-green-600 hover:from-orange-600 hover:to-green-700 text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-              Start Learning
-            </Button>
-            </Link>
-            ):(
-             <UserButton  />
+            {user ? (
+              <Link href="/learn">
+                <Button className="bg-gradient-to-r from-orange-500 to-green-600 hover:from-orange-600 hover:to-green-700 text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                  Start Learning
+                </Button>
+              </Link>
+            ) : (
+              <UserButton />
             )}
+          </div>
 
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center space-x-2">
+            {user ? (
+              <Link href="/learn">
+                <Button
+                  size="sm"
+                  className="bg-gradient-to-r from-orange-500 to-green-600 hover:from-orange-600 hover:to-green-700 text-white font-semibold px-3 py-1 rounded-lg text-sm"
+                >
+                  Learn
+                </Button>
+              </Link>
+            ) : (
+              <UserButton />
+            )}
+            <Button variant="ghost" size="sm" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </Button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
+            <div className="px-4 py-4 space-y-4">
+              <Link
+                href="#features"
+                className="block text-gray-700 hover:text-orange-600 transition-colors font-medium py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Features
+              </Link>
+              <Link
+                href="#about"
+                className="block text-gray-700 hover:text-orange-600 transition-colors font-medium py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
@@ -236,7 +280,7 @@ export default function LandingPage() {
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-6xl md:text-8xl font-black mb-8 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black mb-6 md:mb-8 leading-tight">
               <span className="bg-gradient-to-r from-orange-600 via-red-500 to-green-600 bg-clip-text text-transparent">
                 Master the
               </span>
@@ -245,13 +289,13 @@ export default function LandingPage() {
                 Constitution
               </span>
               <br />
-              <span className="text-4xl md:text-5xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                 Like Never Before
               </span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-2xl md:text-3xl text-gray-700 mb-8 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-700 mb-6 md:mb-8 max-w-4xl mx-auto leading-relaxed px-4">
               Experience India's Constitution through revolutionary{" "}
               <span className="font-bold text-orange-600">3D interactive book</span> technology.{" "}
               <span className="font-bold text-green-600">Learn, explore, and master</span> constitutional knowledge with
@@ -259,7 +303,7 @@ export default function LandingPage() {
             </p>
 
             {/* Key Benefits */}
-            <div className="flex flex-wrap justify-center gap-6 mb-12">
+            <div className="flex flex-wrap justify-center gap-3 md:gap-6 mb-8 md:mb-12 px-4">
               {[
                 { icon: BookOpen, text: "3D Interactive Book" },
                 { icon: MessageCircle, text: "AI Assistant" },
@@ -268,32 +312,34 @@ export default function LandingPage() {
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-center space-x-2 bg-white/80 px-4 py-2 rounded-full shadow-lg border border-gray-200"
+                  className="flex items-center space-x-2 bg-white/80 px-3 md:px-4 py-2 rounded-full shadow-lg border border-gray-200 text-sm md:text-base"
                 >
-                  <item.icon className="w-5 h-5 text-orange-600" />
+                  <item.icon className="w-4 h-4 md:w-5 md:h-5 text-orange-600" />
                   <span className="text-gray-700 font-medium">{item.text}</span>
                 </div>
               ))}
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Button className="bg-gradient-to-r from-orange-500 to-green-600 hover:from-orange-600 hover:to-green-700 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 md:mb-12 px-4">
+              <Button className="w-full sm:w-auto bg-gradient-to-r from-orange-500 to-green-600 hover:from-orange-600 hover:to-green-700 text-white font-bold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                 🚀 Start Your Journey
               </Button>
               <Button
                 variant="outline"
-                className="border-2 border-orange-300 text-orange-700 hover:bg-orange-50 font-semibold text-lg px-8 py-4 rounded-xl transition-all duration-300"
+                className="w-full sm:w-auto border-2 border-orange-300 text-orange-700 hover:bg-orange-50 font-semibold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-xl transition-all duration-300"
               >
                 📖 Watch Demo
               </Button>
             </div>
 
             {/* Scroll Indicator */}
-            <div className="flex flex-col items-center space-y-4 text-orange-600 animate-bounce">
-              <Sparkles className="w-8 h-8" />
-              <span className="text-lg font-semibold">Scroll down to witness the magic</span>
-              <div className="w-1 h-16 bg-gradient-to-b from-orange-400 to-transparent rounded-full"></div>
+            <div className="flex flex-col items-center space-y-2 md:space-y-4 text-orange-600 animate-bounce">
+              <Sparkles className="w-6 h-6 md:w-8 md:h-8" />
+              <span className="text-base md:text-lg font-semibold text-center px-4">
+                Scroll down to witness the magic
+              </span>
+              <div className="w-1 h-12 md:h-16 bg-gradient-to-b from-orange-400 to-transparent rounded-full"></div>
             </div>
           </div>
         </div>
@@ -438,7 +484,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-            <section id="features" className="py-24 bg-gray-50">
+      <section id="features" className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 animate-fade-in">
             <Badge className="mb-4 bg-blue-100 text-blue-700 px-4 py-1.5">Core Features</Badge>
@@ -450,7 +496,7 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             <Card className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in">
               <div className="h-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-t-lg"></div>
               <CardHeader className="text-center pt-8">
@@ -553,7 +599,7 @@ export default function LandingPage() {
               Join thousands of learners who have mastered constitutional knowledge with our platform
             </p>
           </div>
-          <div className="grid md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
             {[
               { number: "75,000+", label: "Active Learners", icon: "👥", desc: "Students & Professionals" },
               { number: "395", label: "Articles Covered", icon: "📜", desc: "Complete Constitution" },
@@ -563,11 +609,11 @@ export default function LandingPage() {
               <div key={index} className="group">
                 <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 hover:bg-white/20 transition-all duration-300">
                   <div className="text-6xl mb-4">{stat.icon}</div>
-                  <div className="text-5xl font-bold mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-3xl md:text-5xl font-bold mb-2 group-hover:scale-110 transition-transform duration-300">
                     {stat.number}
                   </div>
-                  <div className="text-xl font-semibold mb-2">{stat.label}</div>
-                  <div className="text-sm opacity-75">{stat.desc}</div>
+                  <div className="text-base md:text-xl font-semibold mb-2">{stat.label}</div>
+                  <div className="text-xs md:text-sm opacity-75">{stat.desc}</div>
                 </div>
               </div>
             ))}
@@ -586,7 +632,7 @@ export default function LandingPage() {
               To make India's Constitution accessible, engaging, and understandable for every citizen through innovative
               technology and immersive learning experiences.
             </p>
-            <div className="grid md:grid-cols-2 gap-12 text-left">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 text-left">
               <div>
                 <h3 className="text-2xl font-bold mb-4 text-orange-600">🎯 Our Vision</h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -652,7 +698,6 @@ export default function LandingPage() {
                 India's most advanced constitutional learning platform with revolutionary 3D technology, AI assistance,
                 and gamified experiences.
               </p>
-              
             </div>
             <div>
               <h3 className="font-bold mb-8 text-xl text-orange-400">Features</h3>
@@ -661,7 +706,6 @@ export default function LandingPage() {
                 <li className="hover:text-orange-400 transition-colors cursor-pointer">AI Constitutional Assistant</li>
                 <li className="hover:text-orange-400 transition-colors cursor-pointer">Gamified Learning</li>
                 <li className="hover:text-orange-400 transition-colors cursor-pointer">Progress Tracking</li>
-                
               </ul>
             </div>
             <div>
