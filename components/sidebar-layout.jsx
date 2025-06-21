@@ -100,7 +100,8 @@ export default function SidebarLayout({ children }) {
               </div>
               <div>
                 <span className="text-xl font-black bg-gradient-to-r from-orange-600 to-green-600 bg-clip-text text-transparent">
-                  संविधान Learn
+                  VidhikGuru
+
                 </span>
                 <div className="text-xs text-gray-500">Constitutional Platform</div>
               </div>
