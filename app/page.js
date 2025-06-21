@@ -5,9 +5,22 @@ import { useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { BookOpen, MessageCircle, Star,Trophy, Sparkles, Users, Award, Shield } from "lucide-react"
 import Link from "next/link"
+import { UserButton } from "@civic/auth/react";
+import { useUser } from "@civic/auth/react";
+import { useRouter } from "next/navigation"
+
 
 export default function LandingPage() {
   const bookRef = useRef(null)
+  const { user } = useUser();
+  const router= useRouter()
+
+  useEffect(() => {
+    // Redirect to /learn if user is logged in
+    if (user) {
+      router.push('/learn');
+    }
+  }, [user]);
   
   useEffect(() => {
     const loadGSAP = async () => {
@@ -189,11 +202,16 @@ export default function LandingPage() {
             <Link href="#about" className="text-gray-700 hover:text-orange-600 transition-colors font-medium">
               About
             </Link>
-            <Link href= '/learn'>
+            { user ? (
+              <Link href= '/learn'>
             <Button className="bg-gradient-to-r from-orange-500 to-green-600 hover:from-orange-600 hover:to-green-700 text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
               Start Learning
             </Button>
             </Link>
+            ):(
+             <UserButton  />
+            )}
+
           </div>
         </div>
       </nav>

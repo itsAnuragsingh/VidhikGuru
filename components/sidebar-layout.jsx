@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { MessageCircle, Trophy, BookOpen, Menu, X, Sparkles, Users, Settings, HelpCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { UserButton } from "@civic/auth/react";
 
 const navigationItems = [
   {
@@ -176,7 +177,9 @@ export default function SidebarLayout({ children }) {
               </div>
             </div>
           </div>
-
+           <div>
+            <UserButton></UserButton>
+           </div>
           {/* Bottom Navigation */}
           <div className="border-t border-gray-200 p-4">
             <div className="space-y-1">
@@ -215,7 +218,7 @@ export default function SidebarLayout({ children }) {
               <BookOpen className="w-4 h-4 text-orange-700" />
             </div>
             <span className="font-bold bg-gradient-to-r from-orange-600 to-green-600 bg-clip-text text-transparent">
-              संविधान Learn
+              VidhikGuru
             </span>
           </div>
           <div className="w-10"></div>
