@@ -230,7 +230,7 @@ Answer:`)
         {
           context: (input) => {
             const context = docs.map((doc) => doc.pageContent).join('\n\n')
-            console.log(`📖 Context length: ${context.length} characters`)
+            
             return context
           },
           query: (input) => input.query,

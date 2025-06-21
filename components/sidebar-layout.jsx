@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { MessageCircle, Trophy, BookOpen, Menu, X, Sparkles, Users, Settings, HelpCircle } from "lucide-react"
+import { MessageCircle, Trophy, BookOpen, Menu, X, Sparkles, Users, Settings, HelpCircle, ScanText } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { UserButton } from "@civic/auth/react";
@@ -36,6 +36,15 @@ const navigationItems = [
     bgColor: "bg-orange-50",
     activeColor: "bg-orange-100 text-orange-700 border-orange-200",
   },
+  {
+    name: "Scanner",
+    href: "/scanner",
+    icon: ScanText,
+    description: "Scan and Learn",
+    color: "text-purple-600",
+    bgColor: "bg-purple-50",
+    activeColor: "bg-purple-100 text-purple-700 border-purple-200",
+  }
 ]
 
 const bottomItems = [
@@ -82,7 +91,7 @@ export default function SidebarLayout({ children }) {
 
     fetchProgress()
   }, [])
-  console.log("user:", user);
+  
 
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">
@@ -178,7 +187,7 @@ export default function SidebarLayout({ children }) {
               </div>
             </div>
           </div>
-           <div className="flex items-center justify-between p-11 border-t border-gray-200">
+           <div className="flex items-center justify-between p-11 border-t h-[1vw] border-gray-200">
             <UserButton className="border-amber-200"></UserButton>
            </div>
           {/* Bottom Navigation */}
