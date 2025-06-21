@@ -6,6 +6,7 @@ import { BookOpen, Clock, CheckCircle, ArrowRight, Target, AlertCircle } from "l
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
+import { useUser } from "@civic/auth/react";
 
 export default function LearnPage() {
   const [constitutionParts, setConstitutionParts] = useState([])
@@ -13,6 +14,7 @@ export default function LearnPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [debugInfo, setDebugInfo] = useState(null)
+const { user } = useUser();
 
   useEffect(() => {
     fetchData()
@@ -44,7 +46,7 @@ export default function LearnPage() {
       })
 
       // Fetch user progress
-      const progressResponse = await fetch("/api/user-progress?userId=user123")
+      const progressResponse = await fetch("/api/user-progress?userId=" + (user?.id || "user123"))
       let progressData = null
       
       if (progressResponse.ok) {

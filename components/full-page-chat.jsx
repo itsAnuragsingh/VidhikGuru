@@ -19,14 +19,16 @@ import {
   Wifi,
   WifiOff,
 } from "lucide-react"
-
+import { useUser } from "@civic/auth/react";
+import Image from "next/image";
 export default function FullPageChat() {
+  const { user } = useUser();
   const [messages, setMessages] = useState([
     {
       id: "1",
       role: "assistant",
       content:
-        "🙏 Namaste! I'm your Constitutional AI Assistant. I'm here to help you understand India's Constitution, fundamental rights, duties, and legal principles. How can I assist you today?",
+        "🙏 Namaste " + user?.name + "! I'm your Constitutional AI Assistant. I'm here to help you understand India's Constitution, fundamental rights, duties, and legal principles. How can I assist you today?",
       timestamp: new Date(),
     },
   ])
@@ -500,13 +502,12 @@ Feel free to ask about any specific article, amendment, or constitutional concep
             {connectionStatus === "offline" && <WifiOff className="w-4 h-4 text-red-500" />}
             {connectionStatus === "connecting" && <RotateCcw className="w-4 h-4 text-yellow-500 animate-spin" />}
             <div
-              className={`w-2 h-2 rounded-full ${
-                connectionStatus === "online"
+              className={`w-2 h-2 rounded-full ${connectionStatus === "online"
                   ? "bg-green-500"
                   : connectionStatus === "offline"
                     ? "bg-red-500"
                     : "bg-yellow-500"
-              }`}
+                }`}
             ></div>
             <span className="text-sm text-gray-600 capitalize">{connectionStatus}</span>
           </div>
@@ -522,16 +523,33 @@ Feel free to ask about any specific article, amendment, or constitutional concep
             >
               {/* Avatar */}
               <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                  message.role === "user"
+                className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${message.role === "user"
                     ? "bg-gradient-to-r from-orange-500 to-red-500"
                     : message.error
                       ? "bg-gradient-to-r from-red-500 to-red-600"
                       : "bg-gradient-to-r from-blue-500 to-purple-500"
-                }`}
+                  }`}
               >
+                {/* {message.role === "user" ? (
+                  // <User className="w-4 h-4 text-white" />
+                  <Image src={user?.picture} className="w-4 h-4"/>
+                ) : message.error ? (
+                  <AlertCircle className="w-4 h-4 text-white" />
+                ) : (
+                  <Bot className="w-4 h-4 text-white" />
+                )} */}
                 {message.role === "user" ? (
-                  <User className="w-4 h-4 text-white" />
+                  user?.picture ? (
+                    <Image
+                      src={user?.picture}
+                      alt={user.name || "User"}
+                      width={32}
+                      height={32}
+                      className="w-8 h-8 rounded-full object-cover"
+                    />
+                  ) : (
+                    <User className="w-4 h-4 text-white" />
+                  )
                 ) : message.error ? (
                   <AlertCircle className="w-4 h-4 text-white" />
                 ) : (
@@ -541,13 +559,12 @@ Feel free to ask about any specific article, amendment, or constitutional concep
 
               {/* Message Content */}
               <div
-                className={`relative ${
-                  message.role === "user"
+                className={`relative ${message.role === "user"
                     ? "bg-gradient-to-r from-orange-500 to-red-500 text-white"
                     : message.error
                       ? "bg-red-50 border border-red-200"
                       : "bg-gray-50 border border-gray-200"
-                } rounded-2xl px-4 py-3 shadow-sm`}
+                  } rounded-2xl px-4 py-3 shadow-sm`}
               >
                 {message.isTyping ? (
                   <div className="flex items-center space-x-2">
@@ -560,9 +577,8 @@ Feel free to ask about any specific article, amendment, or constitutional concep
                   </div>
                 ) : (
                   <div
-                    className={`${
-                      message.role === "user" ? "text-white" : message.error ? "text-red-800" : "text-gray-800"
-                    }`}
+                    className={`${message.role === "user" ? "text-white" : message.error ? "text-red-800" : "text-gray-800"
+                      }`}
                   >
                     {message.role === "assistant" ? formatMessage(message.content) : message.content}
                   </div>
@@ -665,11 +681,10 @@ Feel free to ask about any specific article, amendment, or constitutional concep
                   ? "Connection lost - please check your internet..."
                   : "Ask me anything about the Indian Constitution..."
               }
-              className={`w-full px-4 py-3 border rounded-2xl focus:outline-none focus:ring-2 focus:border-transparent bg-gray-50 placeholder-gray-500 ${
-                connectionStatus === "offline"
+              className={`w-full px-4 py-3 border rounded-2xl focus:outline-none focus:ring-2 focus:border-transparent bg-gray-50 placeholder-gray-500 ${connectionStatus === "offline"
                   ? "border-red-300 focus:ring-red-500"
                   : "border-gray-300 focus:ring-blue-500"
-              }`}
+                }`}
               disabled={isLoading || connectionStatus === "offline"}
             />
           </div>

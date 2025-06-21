@@ -1,6 +1,9 @@
 import { createCivicAuthPlugin } from "@civic/auth/nextjs"
 
 const nextConfig = {
+  images: {
+    domains: ["auth.civic.com"],
+  },
   /* config options here */
 };
 

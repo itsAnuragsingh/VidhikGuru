@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation"
 export default function LandingPage() {
   const bookRef = useRef(null)
   const { user } = useUser();
+  console.log("User:", user)
   const router= useRouter()
 
   useEffect(() => {
@@ -642,7 +643,7 @@ export default function LandingPage() {
                 </div>
                 <div>
                   <span className="text-3xl font-black bg-gradient-to-r from-orange-400 to-green-400 bg-clip-text text-transparent">
-                    संविधान Learn
+                    VidhikGuru
                   </span>
                   <div className="text-sm text-gray-400">Constitutional Learning Platform</div>
                 </div>
@@ -651,7 +652,7 @@ export default function LandingPage() {
                 India's most advanced constitutional learning platform with revolutionary 3D technology, AI assistance,
                 and gamified experiences.
               </p>
-              <div className="text-sm text-gray-500">🏆 Winner of Digital India Innovation Award 2024</div>
+              
             </div>
             <div>
               <h3 className="font-bold mb-8 text-xl text-orange-400">Features</h3>
@@ -660,7 +661,7 @@ export default function LandingPage() {
                 <li className="hover:text-orange-400 transition-colors cursor-pointer">AI Constitutional Assistant</li>
                 <li className="hover:text-orange-400 transition-colors cursor-pointer">Gamified Learning</li>
                 <li className="hover:text-orange-400 transition-colors cursor-pointer">Progress Tracking</li>
-                <li className="hover:text-orange-400 transition-colors cursor-pointer">Mobile App</li>
+                
               </ul>
             </div>
             <div>
@@ -676,11 +677,11 @@ export default function LandingPage() {
           </div>
           <div className="border-t border-gray-800 mt-16 pt-12 text-center">
             <p className="text-gray-400 text-lg">
-              &copy; 2024 <span className="text-orange-400 font-semibold">संविधान Learn</span>. All rights reserved. Made
+              &copy; 2025 <span className="text-orange-400 font-semibold">VidhikGuru</span>. All rights reserved. Made
               with ❤️ for India 🇮🇳
             </p>
             <div className="mt-4 text-sm text-gray-500">
-              Empowering citizens through constitutional knowledge since 2024
+              Empowering citizens through constitutional knowledge since 2025
             </div>
           </div>
         </div>

@@ -9,13 +9,13 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import Link from "next/link"
-
+import { useUser } from "@civic/auth/react";
 export default function ArticlePage() {
   const params = useParams()
   const router = useRouter()
   const partNo = params.partno
   const articleNo = params.articleno
-
+  const { user } = useUser();
   const [article, setArticle] = useState(null)
   const [part, setPart] = useState(null)
   const [userProgress, setUserProgress] = useState(null)
@@ -65,7 +65,7 @@ const fetchArticleData = async () => {
     }
 
     // Fetch user progress
-    const progressResponse = await fetch(`/api/user-progress?userId=user123`)
+    const progressResponse = await fetch("/api/user-progress?userId=" + (user?.id || "user123"))
     const progressData = await progressResponse.json()
     if (progressData?.success) {
       setUserProgress(progressData.data)
@@ -120,7 +120,7 @@ const fetchArticleData = async () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: "user123",
+          userId: user?.id || "user123",
           partNo,
           articleNo,
           timeSpent: readingTime,

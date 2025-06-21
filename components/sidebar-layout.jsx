@@ -7,7 +7,7 @@ import { MessageCircle, Trophy, BookOpen, Menu, X, Sparkles, Users, Settings, He
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { UserButton } from "@civic/auth/react";
-
+import { useUser } from "@civic/auth/react";
 const navigationItems = [
   {
     name: "Chat",
@@ -62,7 +62,7 @@ const bottomItems = [
 export default function SidebarLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const pathname = usePathname()
-
+  const { user } = useUser();
   // Stats Card - Updated to use real progress data
   const [userProgress, setUserProgress] = useState(null)
 
@@ -70,7 +70,7 @@ export default function SidebarLayout({ children }) {
     // Fetch user progress for sidebar
     const fetchProgress = async () => {
       try {
-        const response = await fetch("/api/user-progress?userId=user123")
+        const response = await fetch("/api/user-progress?userId=" + (user?.id || "user123"))
         const data = await response.json()
         if (data.success) {
           setUserProgress(data.data)
@@ -82,6 +82,7 @@ export default function SidebarLayout({ children }) {
 
     fetchProgress()
   }, [])
+  console.log("user:", user);
 
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">
@@ -159,7 +160,7 @@ export default function SidebarLayout({ children }) {
                   <Sparkles className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <div className="font-semibold text-gray-800">Your Progress</div>
+                  <div className="font-semibold text-gray-800">Welcome, {user?.name}</div>
                   <div className="text-xs text-gray-600">Keep learning!</div>
                 </div>
               </div>
@@ -177,8 +178,8 @@ export default function SidebarLayout({ children }) {
               </div>
             </div>
           </div>
-           <div>
-            <UserButton></UserButton>
+           <div className="flex items-center justify-between p-11 border-t border-gray-200">
+            <UserButton className="border-amber-200"></UserButton>
            </div>
           {/* Bottom Navigation */}
           <div className="border-t border-gray-200 p-4">
