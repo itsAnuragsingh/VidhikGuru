@@ -2,6 +2,7 @@
 
 VidhikGuru is an immersive and interactive web platform that redefines how citizens engage with the Indian Constitution. With a groundbreaking **3D book experience**, **AI-powered assistance**, and **gamified learning modules**, we aim to make constitutional knowledge **accessible**, **engaging**, and **empowering** for every Indian.
 
+![WhatsApp Image 2025-06-22 at 06 12 48_c05eb741](https://github.com/user-attachments/assets/3f19650f-bb05-4ea2-9b90-adf3aafc6e59)
 ---
 
 ## 🚀 Features
@@ -12,6 +13,7 @@ VidhikGuru is an immersive and interactive web platform that redefines how citiz
 - 🃏 **Flashcards** – Learn articles, rights, and amendments with memory-boosting flashcards.
 - 📊 **Progress Tracking** – Visualize your learning journey in real-time.
 
+🌐 Website: (https://vidhik-guru.vercel.app)
 ---
 
 ## 🧠 Our Mission
@@ -51,7 +53,6 @@ This project is designed to stand out in civic-tech or ed-tech hackathons. With 
 
 For feedback, feature requests, or support:
  
-🌐 Website: (https://vidhik-guru.vercel.app)
 
 ---
 
@@ -70,13 +71,7 @@ If you found this project inspiring or useful, don’t forget to ⭐ **star** th
 
 ## 📸 Demo Snapshots
 
-![WhatsApp Image 2025-06-22 at 06 12 48_c05eb741](https://github.com/user-attachments/assets/3f19650f-bb05-4ea2-9b90-adf3aafc6e59)
 ![WhatsApp Image 2025-06-22 at 06 12 46_72cf1b71](https://github.com/user-attachments/assets/46945ba0-47ca-45bd-9adf-ea4fbf9bd28f)
 ![WhatsApp Image 2025-06-22 at 06 12 46_79d714e2](https://github.com/user-attachments/assets/82af9e8d-0f19-4c6b-b6fb-9ce7039817ba)
 ![WhatsApp Image 2025-06-22 at 06 12 46_c760e763](https://github.com/user-attachments/assets/f8380a57-d306-4849-ace2-863374fdd89e)
 ![WhatsApp Image 2025-06-22 at 06 12 47_c9aa2483](https://github.com/user-attachments/assets/bd30a8d5-cd93-411d-9232-2e44a7d607ae)
-![WhatsApp Image 2025-06-22 at 06 12 47_d20a15e7](https://github.com/user-attachments/assets/a38363e8-a276-4a48-8e07-7cbe26792e5f)
-![WhatsApp Image 2025-06-22 at 06 12 47_9e746672](https://github.com/user-attachments/assets/9e6b5dfb-7e1c-49ad-9d1d-286e75213edd)
-![WhatsApp Image 2025-06-22 at 06 12 48_d0aa6bba](https://github.com/user-attachments/assets/ea287d13-9107-48e0-ac2e-b0e092e4195e)
-![WhatsApp Image 2025-06-22 at 06 12 48_36e3aec7](https://github.com/user-attachments/assets/f80567d8-b9b2-4bf4-89ee-9b02048330c2)
-
