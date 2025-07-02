@@ -5,6 +5,7 @@ import { MongoDBAtlasVectorSearch } from '@langchain/mongodb'
 import { RunnableSequence } from '@langchain/core/runnables'
 import { PromptTemplate } from '@langchain/core/prompts'
 
+
 // Global connection pool - reuse connections
 let globalClient = null;
 let globalDb = null;
